@@ -13,6 +13,8 @@ public class Contestant {
     private int luckLevel = ThreadLocalRandom.current().nextInt(0, 30);
 
 
+
+
     // setters and getters
     public int getAttackLevel() {
         return attackLevel;
@@ -28,5 +30,21 @@ public class Contestant {
 
     public void setDefenseLevel(int defenseLevel) {
         this.defenseLevel = defenseLevel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public void setMale(boolean male) {
+        this.male = male;
     }
 }

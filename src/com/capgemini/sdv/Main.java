@@ -11,5 +11,6 @@ public class Main {
         arena.createPlayers();
         arena.getStatusAllPlayers();
 
+        arena.battle();
     }
 }

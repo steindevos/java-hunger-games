@@ -1,5 +1,6 @@
 package com.capgemini.sdv.controller;
 
+import com.capgemini.sdv.model.BattleItem;
 import com.capgemini.sdv.model.Career;
 import com.capgemini.sdv.model.Contestant;
 import com.capgemini.sdv.model.District;
@@ -14,6 +15,9 @@ public class ArenaController {
     private ArrayList<Contestant> contestants = new ArrayList<>();
     // List of all dead Contestants
     private ArrayList<Contestant> deadContestants = new ArrayList<>();
+    // List of battle items
+    private ArrayList<BattleItem> battleItems = new ArrayList<>();
+
 
 
 
@@ -49,11 +53,30 @@ public class ArenaController {
                     + "Sex: " +  (contestant.isMale() ? "Male" : "female") + "\n");
     }
 
+
+
+    // two random players battle till one dies.
     public void battle() {
         Contestant player1 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
         Contestant player2 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
 
-        System.out.println(player1.getName());
-        System.out.println(player2.getName());
+        System.out.println(player1.getName() + " and " + player2.getName() + " enter into battle.");
+
+        while (player1.getHealth() > 0 && player2.getHealth() > 0) {
+            player1.attack(player2);
+            if (player2.getHealth() > 0) {
+                player2.attack(player1);
+            }
+        }
+    }
+
+    // nighttime. During sleep all players regenarate
+    public void nightTime() {
+        // player finds battle item
+
+        System.out.println("All players go to bed");
+        for (Contestant contestant : contestants) {
+            contestant.sleep();
+        }
     }
 }

@@ -12,5 +12,6 @@ public class Main {
         arena.getStatusAllPlayers();
 
         arena.battle();
+        arena.nightTime();
     }
 }

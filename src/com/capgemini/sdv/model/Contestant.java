@@ -12,7 +12,7 @@ public abstract class Contestant {
     private int health = 100;
     private int defenseLevel = 10;
     private int attackLevel = 10;
-    private int luckLevel = ThreadLocalRandom.current().nextInt(0, 2);
+    private int luckLevel;
 
 
     // setters and getters
@@ -70,5 +70,22 @@ public abstract class Contestant {
         health = 100;
     }
 
-    abstract void specialAttack();
+    // Player attacks other player. Damage done is subtracted from health other player
+    public void attack(Contestant player) {
+        luckLevel = ThreadLocalRandom.current().nextInt(1, 5);
+        int damageDone = luckLevel * getAttackLevel() - player.getDefenseLevel();
+        if (damageDone < 0) {
+            damageDone = 0;
+        }
+
+        player.setHealth(player.getHealth() - damageDone);
+        if (player.getHealth() <= 0) {
+            System.out.println(player.getName() + " was slain by " + getName());
+
+        } else {
+            System.out.println(getName() + " attacks " + player.getName() + ". " + damageDone + " damage was done. " + player.getName() + " has " + player.getHealth() + " health left.");
+        }
+    }
+
+    abstract int specialAttack();
 }

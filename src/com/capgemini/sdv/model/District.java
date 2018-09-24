@@ -3,7 +3,7 @@ package com.capgemini.sdv.model;
 // Districts: strong defense/weak offense
 public class District extends Contestant {
 
-    int defenseLevel = super.getDefenseLevel() + 20;
+    int defenseLevel = super.getDefenseLevel() + 10;
 
     @Override
     public int getDefenseLevel() {
@@ -16,7 +16,9 @@ public class District extends Contestant {
     }
 
     @Override
-    void specialAttack() {
-        int specialAttack = 30;
+    int specialAttack() {
+        int attackLevel = getAttackLevel() + 20;
+        int damageDone = attackLevel * getLuckLevel();
+        return damageDone;
     }
 }

@@ -55,7 +55,7 @@ public class ArenaController {
 
 
 
-    // two random players battle till one dies.
+    // two random players battle till one dies. Dead contestants are removed from contestants and added to deadcontestants
     public void battle() {
         Contestant player1 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
         Contestant player2 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
@@ -66,15 +66,24 @@ public class ArenaController {
             player1.attack(player2);
             if (player2.getHealth() > 0) {
                 player2.attack(player1);
+            } else {
+                deadContestants.add(player2);
+                contestants.remove(player2);
+            }
+            if (player1.getHealth() <= 0) {
+                deadContestants.add(player1);
+                contestants.remove(player1);
             }
         }
+
+        System.out.println(deadContestants.get(0).getName());
     }
 
     // nighttime. During sleep all players regenarate
     public void nightTime() {
         // player finds battle item
 
-        System.out.println("All players go to bed");
+        System.out.println("All players go to bed. Health is set back to 100 for all players");
         for (Contestant contestant : contestants) {
             contestant.sleep();
         }

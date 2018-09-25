@@ -62,14 +62,13 @@ public class ArenaController {
 
 
     // two random players battle till one dies. Winner gains bonus attack and defense. Dead contestants are removed from contestants and added to deadcontestants
-    public void battle() {
+    public void battleToDeath() {
         Contestant player1 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
         contestants.remove(player1);
         Contestant player2 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
         contestants.remove(player2);
 
         System.out.println(player1.getName() + " and " + player2.getName() + " enter into battle.");
-
         while (player1.getHealth() > 0 && player2.getHealth() > 0) {
             player1.attack(player2);
             if (player2.getHealth() > 0) {

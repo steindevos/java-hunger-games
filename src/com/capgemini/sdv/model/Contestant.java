@@ -72,18 +72,23 @@ public abstract class Contestant {
 
     // Player attacks other player. Damage done is subtracted from health other player
     public void attack(Contestant player) {
-        luckLevel = ThreadLocalRandom.current().nextInt(1, 5);
-        int damageDone = luckLevel * getAttackLevel() - player.getDefenseLevel();
-        if (damageDone < 0) {
-            damageDone = 0;
+        int doesSpecialAttack = ThreadLocalRandom.current().nextInt(1, 11);
+        int damageDone;
+
+        if (doesSpecialAttack == 10) {
+            damageDone = specialAttack();
+        } else {
+            luckLevel = ThreadLocalRandom.current().nextInt(1, 5);
+            damageDone = luckLevel * getAttackLevel() - player.getDefenseLevel();
+            if (damageDone < 0) {
+                damageDone = 0;
+            }
         }
 
+        System.out.println(getName() + " does " + damageDone + " damage to " + player.getName());
         player.setHealth(player.getHealth() - damageDone);
         if (player.getHealth() <= 0) {
             System.out.println(player.getName() + " was slain by " + getName());
-
-        } else {
-            System.out.println(getName() + " attacks " + player.getName() + ". " + damageDone + " damage was done. " + player.getName() + " has " + player.getHealth() + " health left.");
         }
     }
 

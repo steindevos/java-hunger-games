@@ -11,7 +11,7 @@ public class Main {
         arena.createPlayers();
 
         while (arena.getContestants().size() > 1) {
-            arena.battle();
+            arena.battleToDeath();
             arena.nightTime();
         }
     }

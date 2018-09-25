@@ -2,7 +2,7 @@ package com.capgemini.sdv.model;
 
 // Career: strong offense/weak defense
 public class Career extends Contestant {
-    int attackLevel = super.getAttackLevel() + 5;
+    int attackLevel = super.getAttackLevel() + 10;
 
 
     @Override
@@ -17,8 +17,9 @@ public class Career extends Contestant {
 
     @Override
     int specialAttack() {
-        int attackLevel = getAttackLevel() + 20;
-        int damageDone = attackLevel * getLuckLevel();
+        int damageDone = 80;
+        System.out.println("WOOOWWW, SPECIAL ATTACK!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         return damageDone;
     }
 }

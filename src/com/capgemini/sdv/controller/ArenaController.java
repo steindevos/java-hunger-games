@@ -18,8 +18,14 @@ public class ArenaController {
     // List of battle items
     private ArrayList<BattleItem> battleItems = new ArrayList<>();
 
+    // Getters and setters
+    public ArrayList<Contestant> getContestants() {
+        return contestants;
+    }
 
-
+    public ArrayList<Contestant> getDeadContestants() {
+        return deadContestants;
+    }
 
     // Create 24 contestants
     Contestant contestant;
@@ -55,10 +61,12 @@ public class ArenaController {
 
 
 
-    // two random players battle till one dies. Dead contestants are removed from contestants and added to deadcontestants
+    // two random players battle till one dies. Winner gains bonus attack and defense. Dead contestants are removed from contestants and added to deadcontestants
     public void battle() {
         Contestant player1 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
+        contestants.remove(player1);
         Contestant player2 = contestants.get(ThreadLocalRandom.current().nextInt(0, contestants.size()));
+        contestants.remove(player2);
 
         System.out.println(player1.getName() + " and " + player2.getName() + " enter into battle.");
 
@@ -69,14 +77,16 @@ public class ArenaController {
             } else {
                 deadContestants.add(player2);
                 contestants.remove(player2);
+                contestants.add(player1);
+                player1.gainExperience();
             }
             if (player1.getHealth() <= 0) {
                 deadContestants.add(player1);
                 contestants.remove(player1);
+                contestants.add(player2);
+                player2.gainExperience();
             }
         }
-
-        System.out.println(deadContestants.get(0).getName());
     }
 
     // nighttime. During sleep all players regenarate

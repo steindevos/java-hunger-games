@@ -9,9 +9,10 @@ public class Main {
         ArenaController arena = new ArenaController();
 
         arena.createPlayers();
-        arena.getStatusAllPlayers();
 
-        arena.battle();
-        arena.nightTime();
+        while (arena.getContestants().size() > 1) {
+            arena.battle();
+            arena.nightTime();
+        }
     }
 }

@@ -87,5 +87,11 @@ public abstract class Contestant {
         }
     }
 
+    public void gainExperience() {
+        this.attackLevel = attackLevel + 5;
+        this.defenseLevel = defenseLevel + 5;
+        System.out.println(this.name + " has gained experience.");
+    }
+
     abstract int specialAttack();
 }

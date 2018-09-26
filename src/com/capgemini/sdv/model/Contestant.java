@@ -2,7 +2,6 @@ package com.capgemini.sdv.model;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-
 // Contestant parent class; Contestants are spawned in the Arena and have to fight till one lasts.
 public abstract class Contestant {
     // Fields
@@ -74,7 +73,7 @@ public abstract class Contestant {
     public void attack(Contestant player) {
         int doesSpecialAttack = ThreadLocalRandom.current().nextInt(1, 11);
         int damageDone;
-
+        // determines how much damage is done
         if (doesSpecialAttack == 10) {
             damageDone = specialAttack();
         } else {
@@ -84,7 +83,7 @@ public abstract class Contestant {
                 damageDone = 0;
             }
         }
-
+        // story and healt minus damage
         System.out.println(getName() + " does " + damageDone + " damage to " + player.getName());
         player.setHealth(player.getHealth() - damageDone);
         if (player.getHealth() <= 0) {
@@ -92,11 +91,13 @@ public abstract class Contestant {
         }
     }
 
+    // players can gain exp when the win a fight
     public void gainExperience() {
         this.attackLevel = attackLevel + 5;
         this.defenseLevel = defenseLevel + 5;
         System.out.println(this.name + " has gained experience.");
     }
 
+    // all childclasses of Contestant haver their own special attack
     abstract int specialAttack();
 }

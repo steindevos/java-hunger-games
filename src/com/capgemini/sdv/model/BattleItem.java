@@ -10,4 +10,17 @@ public class BattleItem {
         this.bonusAttack = bonusAttack;
         this.bonusDefense = bonusDefense;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getBonusAttack() {
+        return bonusAttack;
+    }
+
+    public int getBonusDefense() {
+        return bonusDefense;
+    }
+
 }

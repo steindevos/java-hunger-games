@@ -5,6 +5,7 @@ import com.capgemini.sdv.model.Career;
 import com.capgemini.sdv.model.Contestant;
 import com.capgemini.sdv.model.District;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,6 +27,12 @@ public class ArenaController {
     public ArrayList<Contestant> getDeadContestants() {
         return deadContestants;
     }
+
+    public ArrayList<BattleItem> getBattleItems() {
+        return battleItems;
+    }
+
+
 
     // Create 24 contestants
     Contestant contestant;
@@ -49,14 +56,49 @@ public class ArenaController {
         }
     }
 
+    public void dropBattleItems() {
+        BattleItem battleItem;
+        for (int i = 0; i < 20; i++) {
+            if (i % 2 == 0) {
+                battleItem = new BattleItem("Sword", 5, 0 );
+            } else {
+                battleItem = new BattleItem("shield", 0, 5);
+            }
+            battleItems.add(battleItem);
+        }
+    }
+
+    public void createBattleItem() {
+
+    }
+
+    // All players have a chance every night of finding a battle item.
+    public void findsBattleItem() {
+        for (Contestant contestant : contestants) {
+            int chance = ThreadLocalRandom.current().nextInt(0, 21);
+            if (chance == 20) {
+                int randomBattleItem = ThreadLocalRandom.current().nextInt(0, battleItems.size());
+                BattleItem battleItem = battleItems.get(randomBattleItem);
+                contestant.setAttackLevel(contestant.getAttackLevel() + battleItem.getBonusAttack());
+                contestant.setDefenseLevel(contestant.getDefenseLevel() + battleItem.getBonusDefense());
+                System.out.println(contestant.getName() + " has found a " + battleItem.getType() + " and gets " + battleItem.getBonusAttack() + " attack bonus and " + battleItem.getBonusDefense() + " defense bonus.");
+            }
+        }
+    }
+
+
     public void getStatusAllPlayers() {
-        for (Contestant contestant : contestants)
-            System.out.println("Name: " + contestant.getName() +"\n"
-                    + "Attack level: " + contestant.getAttackLevel() + "\n"
-                    + "Defense level: " + contestant.getDefenseLevel() + "\n"
-                    + "Health level: " + contestant.getHealth() + "\n"
-                    + "Luck level: " + contestant.getLuckLevel() + "\n"
-                    + "Sex: " +  (contestant.isMale() ? "Male" : "female") + "\n");
+        System.out.println("-----------------STATUS ALL PLAYERS------------------\n");
+        for (Contestant contestant : contestants) {
+            System.out.println(
+                "Name: " + contestant.getName() +"\n"
+                + "Attack level: " + contestant.getAttackLevel() + "\n"
+                + "Defense level: " + contestant.getDefenseLevel() + "\n"
+                + "Health level: " + contestant.getHealth() + "\n"
+                + "Luck level: " + contestant.getLuckLevel() + "\n"
+                + "Sex: " +  (contestant.isMale() ? "Male" : "female") + "\n");
+        }
+        System.out.println("-----------------------------------------------------\n");
     }
 
 
@@ -90,11 +132,13 @@ public class ArenaController {
 
     // nighttime. During sleep all players regenarate
     public void nightTime() {
-        // player finds battle item
-
-        System.out.println("All players go to bed. Health is set back to 100 for all players");
+        // player might find a battle item and get bonus
+        findsBattleItem();
+        // all players get full health
+        System.out.println("All players go to bed. Health is set back to 100 for all players \n");
         for (Contestant contestant : contestants) {
             contestant.sleep();
         }
     }
+
 }

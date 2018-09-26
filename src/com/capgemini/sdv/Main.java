@@ -29,3 +29,4 @@ public class Main {
         }
     }
 }
+//Rick's advise: Try ... Catch

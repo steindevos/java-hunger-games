@@ -73,7 +73,8 @@ public abstract class Contestant {
     public void attack(Contestant player) {
         int doesSpecialAttack = ThreadLocalRandom.current().nextInt(1, 11);
         int damageDone;
-        // determines how much damage is done
+
+        // sets damage done
         if (doesSpecialAttack == 10) {
             damageDone = specialAttack();
         } else {
@@ -83,7 +84,7 @@ public abstract class Contestant {
                 damageDone = 0;
             }
         }
-        // story and healt minus damage
+        // substracts damage from health and prints storyline
         System.out.println(getName() + " does " + damageDone + " damage to " + player.getName());
         player.setHealth(player.getHealth() - damageDone);
         if (player.getHealth() <= 0) {
@@ -98,6 +99,6 @@ public abstract class Contestant {
         System.out.println(this.name + " has gained experience.");
     }
 
-    // all childclasses of Contestant haver their own special attack
+    // all childclasses of Contestant have their own special attack
     abstract int specialAttack();
 }

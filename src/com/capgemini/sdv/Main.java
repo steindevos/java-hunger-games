@@ -1,24 +1,31 @@
 package com.capgemini.sdv;
 
 import com.capgemini.sdv.controller.ArenaController;
-import com.capgemini.sdv.model.BattleItem;
-import com.capgemini.sdv.model.Contestant;
 
 public class Main {
-
     public static void main(String[] args) {
         ArenaController arena = new ArenaController();
-
-//        commander snow must be able to create battleitems
-//        commander snow must be able to place a bet on a Contestant
-
+//      commander snow must be able to place a bet on a Contestant
         arena.createPlayers();
         arena.dropBattleItems();
-
-        while (arena.getContestants().size() > 1) {
-            arena.battleToDeath();
-            arena.nightTime();
-            arena.getStatusAllPlayers();
+        boolean gameMode = true;
+        while(gameMode) {
+            int choice = arena.gameMenu();
+            switch (choice) {
+                case 1: arena.battleToDeath();
+                    arena.nightTime();
+                    break;
+                case 2: arena.addBattleItem();
+                    break;
+                case 3: arena.getStatusAllPlayers();
+                    break;
+                case 4: arena.getAllBattleItems();
+                    break;
+                case 5: gameMode = false;
+                    System.out.println("Thank your for playing, Mr. Snow");
+                    break;
+                default: System.out.println("no valid input; please enter a number");
+            }
         }
     }
 }

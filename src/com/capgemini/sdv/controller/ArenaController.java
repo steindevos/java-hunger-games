@@ -7,6 +7,7 @@ import com.capgemini.sdv.model.District;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 // Class that sets up the Arena for battle
@@ -58,7 +59,7 @@ public class ArenaController {
 
     public void dropBattleItems() {
         BattleItem battleItem;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             if (i % 2 == 0) {
                 battleItem = new BattleItem("Sword", 5, 0 );
             } else {
@@ -68,8 +69,20 @@ public class ArenaController {
         }
     }
 
-    public void createBattleItem() {
+    public void addBattleItem() {
+        Scanner in = new Scanner(System.in);
 
+        System.out.println("Name of battle item: ");
+        String name = in.nextLine();
+
+        System.out.println("Attack bonus: ");
+        int attackBonus = in.nextInt();
+
+        System.out.println("Defense bonus: ");
+        int defenseBonus = in.nextInt();
+
+        BattleItem newBattleItem = new BattleItem(name, attackBonus, defenseBonus);
+        battleItems.add(newBattleItem);
     }
 
     // All players have a chance every night of finding a battle item.
@@ -86,6 +99,15 @@ public class ArenaController {
         }
     }
 
+    public void getAllBattleItems() {
+        System.out.println("-----Battle Items in the game-----\n");
+        for (BattleItem battleItem : battleItems) {
+            System.out.println("Name: " + battleItem.getType());
+            System.out.println("Attack bonus: " + battleItem.getBonusAttack());
+            System.out.println("Defense bonus: " + battleItem.getBonusDefense() + "\n");
+        }
+    }
+
 
     public void getStatusAllPlayers() {
         System.out.println("-----------------STATUS ALL PLAYERS------------------\n");
@@ -95,7 +117,6 @@ public class ArenaController {
                 + "Attack level: " + contestant.getAttackLevel() + "\n"
                 + "Defense level: " + contestant.getDefenseLevel() + "\n"
                 + "Health level: " + contestant.getHealth() + "\n"
-                + "Luck level: " + contestant.getLuckLevel() + "\n"
                 + "Sex: " +  (contestant.isMale() ? "Male" : "female") + "\n");
         }
         System.out.println("-----------------------------------------------------\n");
@@ -139,6 +160,20 @@ public class ArenaController {
         for (Contestant contestant : contestants) {
             contestant.sleep();
         }
+    }
+
+
+    public int gameMenu() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("----------MENU----------");
+        System.out.println("1.  Next round");
+        System.out.println("2.  Add battle item");
+        System.out.println("3.  Get status of all contestants");
+        System.out.println("4.  Get all battle items in game");
+        System.out.println("5.  Exit game");
+        System.out.println("------------------------");
+        int choice = Integer.parseInt(in.nextLine());
+        return choice;
     }
 
 }

@@ -22,5 +22,4 @@ public class BattleItem {
     public int getBonusDefense() {
         return bonusDefense;
     }
-
 }

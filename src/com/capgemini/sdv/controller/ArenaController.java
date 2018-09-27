@@ -57,6 +57,7 @@ public class ArenaController {
         }
     }
 
+    // drops default battle items in game
     public void dropBattleItems() {
         BattleItem battleItem;
         for (int i = 0; i < 10; i++) {
@@ -99,6 +100,7 @@ public class ArenaController {
         }
     }
 
+    // Prints stats of all battle items
     public void getAllBattleItems() {
         System.out.println("-----Battle Items in the game-----\n");
         for (BattleItem battleItem : battleItems) {
@@ -108,7 +110,7 @@ public class ArenaController {
         }
     }
 
-
+    //Prints stats of all players
     public void getStatusAllPlayers() {
         System.out.println("-----------------STATUS ALL PLAYERS------------------\n");
         for (Contestant contestant : contestants) {
@@ -121,7 +123,6 @@ public class ArenaController {
         }
         System.out.println("-----------------------------------------------------\n");
     }
-
 
 
     // two random players battle till one dies. Winner gains bonus attack and defense. Dead contestants are removed from contestants and added to deadcontestants
@@ -169,20 +170,6 @@ public class ArenaController {
         for (Contestant contestant : contestants) {
             contestant.sleep();
         }
-    }
-
-
-    public int gameMenu() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("----------MENU----------");
-        System.out.println("1.  Next round");
-        System.out.println("2.  Add battle item");
-        System.out.println("3.  Get status of all contestants");
-        System.out.println("4.  Get all battle items in game");
-        System.out.println("5.  Exit game");
-        System.out.println("------------------------");
-        int choice = Integer.parseInt(in.nextLine());
-        return choice;
     }
 
 }

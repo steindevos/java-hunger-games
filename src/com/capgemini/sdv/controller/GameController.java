@@ -13,16 +13,18 @@ public class GameController {
         while(gameMode) {
             int choice = gameMenu();
             switch (choice) {
-                case 1: arena.battleToDeath();
+                case 1: arena.battleTillOneLasts();
+                    break;
+                case 2: arena.battleToDeath();
                     arena.nightTime();
                     break;
-                case 2: arena.addBattleItem();
+                case 3: arena.addBattleItem();
                     break;
-                case 3: arena.getStatusAllPlayers();
+                case 4: arena.getStatusAllPlayers();
                     break;
-                case 4: arena.getAllBattleItems();
+                case 5: arena.getAllBattleItems();
                     break;
-                case 5: gameMode = false;
+                case 6: gameMode = false;
                     break;
                 default: System.out.println("no valid input; please enter a number");
             }
@@ -34,11 +36,12 @@ public class GameController {
     public int gameMenu() {
         Scanner in = new Scanner(System.in);
         System.out.println("----------MENU----------");
-        System.out.println("1.  Next round");
-        System.out.println("2.  Add battle item");
-        System.out.println("3.  Get status of all contestants");
-        System.out.println("4.  Get all battle items in game");
-        System.out.println("5.  Exit game");
+        System.out.println("1.  Play all rounds in one go");
+        System.out.println("2.  Play one round");
+        System.out.println("3.  Add battle item");
+        System.out.println("4.  Get status of all contestants");
+        System.out.println("5.  Get all battle items in game");
+        System.out.println("6.  Exit game");
         System.out.println("------------------------");
         int choice = Integer.parseInt(in.nextLine());
         return choice;

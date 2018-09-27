@@ -36,8 +36,8 @@ public class ArenaController {
 
 
     // Create 24 contestants
-    Contestant contestant;
     public void createPlayers() {
+        Contestant contestant;
         for (int i = 1; i <= 18; i++) {
             contestant = new District();
             contestant.setName("District"+i);
@@ -158,6 +158,14 @@ public class ArenaController {
                 contestants.add(player2);
                 player2.gainExperience();
             }
+        }
+    }
+
+    //battle till one player lasts
+    public void battleTillOneLasts() {
+        while (contestants.size() > 1) {
+            battleToDeath();
+            nightTime();
         }
     }
 

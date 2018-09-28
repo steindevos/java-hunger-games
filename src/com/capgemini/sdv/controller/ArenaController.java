@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 // Class that sets up the Arena for battle
 public class ArenaController {
 
+    private static int numberOfRounds = 0;
     // list of 24 Contestants
     private ArrayList<Contestant> contestants = new ArrayList<>();
     // List of all dead Contestants
@@ -114,12 +115,7 @@ public class ArenaController {
     public void getStatusAllPlayers() {
         System.out.println("-----------------STATUS ALL PLAYERS------------------\n");
         for (Contestant contestant : contestants) {
-            System.out.println(
-                "Name: " + contestant.getName() +"\n"
-                + "Attack level: " + contestant.getAttackLevel() + "\n"
-                + "Defense level: " + contestant.getDefenseLevel() + "\n"
-                + "Health level: " + contestant.getHealth() + "\n"
-                + "Sex: " +  (contestant.isMale() ? "Male" : "female") + "\n");
+            contestant.getStats();
         }
         System.out.println("-----------------------------------------------------\n");
     }
@@ -128,9 +124,9 @@ public class ArenaController {
     // two random players battle till one dies. Winner gains bonus attack and defense. Dead contestants are removed from contestants and added to deadcontestants
     public void battleToDeath() {
         // checks if there is more than one player in the areana
-        if (contestants.size() <= 1) {
-            System.out.println("THE WINNER OF THE HUNGER GAMES IS: ");
-            getStatusAllPlayers();
+        GameController gameController = new GameController();
+        if (contestants.size() == 1) {
+            gameController.presentWinner(contestants.get(0));
             return;
         }
 
@@ -141,6 +137,7 @@ public class ArenaController {
         contestants.remove(player2);
 
         // two players fight till one dies
+        System.out.println("ROUND " + ++numberOfRounds + "\n");
         System.out.println(player1.getName() + " and " + player2.getName() + " enter into battle.");
         while (player1.getHealth() > 0 && player2.getHealth() > 0) {
             player1.attack(player2);
@@ -158,6 +155,11 @@ public class ArenaController {
                 contestants.add(player2);
                 player2.gainExperience();
             }
+        }
+
+        if (contestants.size() == 1) {
+            gameController.presentWinner(contestants.get(0));
+            return;
         }
     }
 

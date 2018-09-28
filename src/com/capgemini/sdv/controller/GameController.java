@@ -1,5 +1,7 @@
 package com.capgemini.sdv.controller;
 
+import com.capgemini.sdv.model.Contestant;
+
 import java.util.Scanner;
 
 public class GameController {
@@ -45,6 +47,13 @@ public class GameController {
         System.out.println("------------------------");
         int choice = Integer.parseInt(in.nextLine());
         return choice;
+    }
+
+    public void presentWinner(Contestant contestant) {
+        System.out.println("----------WINNER----------");
+        System.out.println("The winner of this round of the Hunger games is " + contestant.getName());
+        contestant.getStats();
+        System.out.println("--------------------------");
     }
 
 

@@ -1,5 +1,7 @@
 package com.capgemini.sdv.model;
 
+import com.sun.nio.sctp.SctpSocketOption;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 // Contestant parent class; Contestants are spawned in the Arena and have to fight till one lasts.
@@ -97,6 +99,13 @@ public abstract class Contestant {
         this.attackLevel = attackLevel + 5;
         this.defenseLevel = defenseLevel + 5;
         System.out.println(this.name + " has gained experience.");
+    }
+
+    public void getStats() {
+        System.out.println("Name: " + getName());
+        System.out.println("Attack level: " + getAttackLevel());
+        System.out.println("Defense level: " + getDefenseLevel());
+        System.out.println("Health: " + getHealth() + "\n");
     }
 
     // all childclasses of Contestant have their own special attack
